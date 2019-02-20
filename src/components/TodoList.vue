@@ -2,58 +2,40 @@
   <div class="todolist">
     <ul class="todolist-ul">
       <li v-for="(list, index) in todolists" :key="index">
-        {{ todolists[index] }}
-        <span class="delete-list-btn" @click="deleteOneList(index)"><img src="../assets/deletebtn.png" alt="delete"></span>
+        <input class="edit-list-input" v-model="todolists[index]">
         <span class="edit-list-btn" @click="editOneList(index)"><img src="../assets/edit.png" alt="edit"></span>
-        <!-- <input v-if="editList[index]" v-model="editListContent" class="edit-list-input" type="text" @blur="editListToLists()"> -->
+        <span class="delete-list-btn" @click="deleteOneList(index)"><img src="../assets/deletebtn.png" alt="delete"></span>
       </li>
     </ul>
-    <span v-if="!addList" class="add-list"><button @click="addOneList()">+</button></span>
-    <input v-model="addListContent" class="add-list-input" v-if="addList" type="text" @blur="addListToLists()">
+    <span v-show="!addList" class="add-list"><button @click="addOneList()">+</button></span>
+    <input v-model="addListContent" class="add-list-input" v-show="addList" type="text" @blur="addListToLists()">
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import Component from 'vue-class-component'
-// import AddList from './AddList.vue'
-@Component({
-  // components: {
-  //   'g-addList': AddList
-  // }
-})
+import { Component, Watch } from 'vue-property-decorator'
+@Component
 export default class Todolist extends Vue {
   todolists: string[] = [
-    'learn typescript',
-    'learn vue',
-    'learn english',
-    'join meeting'
+    'aaa'
   ]
   addList: boolean = false
-  editList: boolean[] = [false]
   addListContent: string = ''
-  editListContent: string = ''
+  editOneList (index: number, el: any) {
+    document.getElementsByTagName('input')[index].focus()
+  }
   addOneList () {
     this.addList = true
-  }
-  editListToLists (value: string) {
-    // if (this.editListContent) {
-    //   this.todolists
-    //   this.addList = false
-    //   this.addListContent = ''
-    // }
   }
   addListToLists (value: string) {
     if (this.addListContent) {
       this.todolists.push(this.addListContent)
       this.addList = false
       this.addListContent = ''
+    } else {
+      this.addList = false
     }
-  }
-  editOneList (index: number) {
-    // this.editList[index] = true
-    // this.deleteOneList(index)
-    // this.addList = true
   }
   deleteOneList (index: number) {
     this.todolists.splice(index, 1)
@@ -68,17 +50,24 @@ export default class Todolist extends Vue {
     padding: 0;
   }
   ul.todolist-ul li {
-    padding-right: 16px;
+    position: relative;
     height: 40px;
     line-height: 40px;
+    text-align: left;
     border-bottom: 1px solid #0dbc79;
     list-style-type: none;
   }
   .delete-list-btn, .edit-list-btn {
     margin-left: 16px;
-    float: right;
     color: red;
     font-size: 24px;
+    position: absolute;
+  }
+  .edit-list-btn {
+    right: 40px;
+  }
+  .delete-list-btn {
+    right: 0;
   }
   .delete-list-btn:hover, .edit-list-btn:hover {
     cursor: pointer;
@@ -102,7 +91,8 @@ export default class Todolist extends Vue {
     width: 40%;
     height: 40px;
     line-height: 40px;
-    margin: 0 auto;
+    font-size: 20px;
+    margin: 10px auto 0;
     border: 1px solid #0dbc79;
     border-radius: 5px;
     text-indent: 16px;
@@ -110,13 +100,15 @@ export default class Todolist extends Vue {
     display: block;
   }
   .edit-list-input {
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    margin-top: 10px;
-    border: 1px solid #0dbc79;
-    text-indent: 16px;
+    width: calc(100% - 80px);
+    font-size: 20px;
+    border: none;
     outline: none;
-    display: block;
+    text-indent: 16px;
+  }
+  .edit-list-input:focus {
+    height: 38px;
+    border-radius: 5px;
+    border: 1px solid #0dbc79;
   }
 </style>

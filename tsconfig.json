@@ -1,0 +1,38 @@
+{
+  "include": [
+    "src/*",
+    "src/**/*"
+  ],
+  "exclude": [
+    "node-modules"
+  ],
+  "compilerOptions": {
+    "strictPropertyInitialization": false,
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "strict": true,
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "strictFunctionTypes": false,
+    "allowJs": true,
+    "module": "esnext",
+    "target": "es5",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "lib": [
+      "dom",
+      "es5",
+      "es6",
+      "es7",
+      "es2015.promise"
+    ],
+    "sourceMap": true,
+    "pretty": true
+  }
+}

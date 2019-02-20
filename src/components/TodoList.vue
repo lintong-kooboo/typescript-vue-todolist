@@ -52,8 +52,8 @@ export default class Todolist extends Vue {
   }
   editOneList (index: number) {
     // this.editList[index] = true
-    this.deleteOneList(index)
-    this.addList = true
+    // this.deleteOneList(index)
+    // this.addList = true
   }
   deleteOneList (index: number) {
     this.todolists.splice(index, 1)
@@ -104,6 +104,7 @@ export default class Todolist extends Vue {
     line-height: 40px;
     margin: 0 auto;
     border: 1px solid #0dbc79;
+    border-radius: 5px;
     text-indent: 16px;
     outline: none;
     display: block;
@@ -112,6 +113,7 @@ export default class Todolist extends Vue {
     width: 100%;
     height: 40px;
     line-height: 40px;
+    margin-top: 10px;
     border: 1px solid #0dbc79;
     text-indent: 16px;
     outline: none;
